@@ -4,11 +4,11 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <Link className="navbarHome" to={"/"}>
-        Home
+        <h2>Home</h2>
       </Link>
       <Link className="navbarLoginSignUp" to={"/loginsignup"}>
-        Login/Sign Up
-      </Link>
+            <h3>Login/Sign Up</h3>     
+             </Link>
     </div>
   );
 };
