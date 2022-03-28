@@ -1,18 +1,45 @@
+import { useState } from "react";
+import axios from 'axios';
+
 export const LoginSignUp = () => {
-
-  
-
-
-
+    const [existingUser,setExistingUser] = useState({
+        name:"",
+        password:""
+    })
+    const [user,setUser] = useState(
+        {
+            name: "",
+            password: "",
+            location: "",
+            interests: [],
+            image: "",
+            subscribed: []
+        }
+    )
+    const handelChange = (event)=>{
+        if(event.target.checked){
+            setUser({...user,interests:[...user.interests,event.target.className]})
+            return;
+        } else if(!event.target.checked){
+            // setUser({...user,interests:[...(user.interests.filter(ele=>ele!=event.target.className))]})
+            setUser({...user,[event.target.className]:event.target.value})
+        }
+    }
+    const handelLogin = (event)=>{
+        setExistingUser({...user,[event.target.className]:event.target.value})
+    }
     return (
       <div className="loginSignUp">
-        <form className="signUp" onSubmit={(e) => { }}>
+        <form className="signUp" onSubmit={(e) => {
+            e.preventDefault()
+            axios.post(`http://localhost:8080/users`,user)
+        }}>
           <h1>SignUp</h1>
           <label>name</label>
           <input
             type="text"
             className="name"
-            onChange={(event) => { }}
+            onChange={(event) => { handelChange(event) }}
             required
           />
           <br />
@@ -20,11 +47,11 @@ export const LoginSignUp = () => {
           <input
             type="text"
             className="password"
-            onChange={(event) => { }}
+            onChange={(event) => { handelChange(event) }}
             required
           />
           <br />
-          <select value={""} className="location" onChange={(event) => { }}>
+          <select className="location" onChange={(event) => { handelChange(event) }}>
             <option value=""></option>
             <option value="bangalore">Bangalore</option>
             <option value="kolkata">Kolkata</option>
@@ -37,41 +64,51 @@ export const LoginSignUp = () => {
           <input
             type="checkbox"
             className="technology"
-            onChange={(event) => { }}
+            onChange={(event) => { handelChange(event) }}
           />
           <br />
           <label>food</label>
-          <input type="checkbox" className="food" onChange={(event) => { }} />
+          <input type="checkbox" className="food" onChange={(event) => { handelChange(event) }} />
           <br />
           <label>movies</label>
-          <input type="checkbox" className="movies" onChange={(event) => { }} />
+          <input type="checkbox" className="movies" onChange={(event) => { handelChange(event) }} />
           <br />
           <label>culture</label>
-          <input type="checkbox" className="culture" onChange={(event) => { }} />
+          <input type="checkbox" className="culture" onChange={(event) => { handelChange(event) }} />
           <br />
           <label>art</label>
-          <input type="checkbox" className="art" onChange={(event) => { }} />
+          <input type="checkbox" className="art" onChange={(event) => { handelChange(event) }} />
           <br />
           <label>drama</label>
-          <input type="checkbox" className="drama" onChange={(event) => { }} />
+          <input type="checkbox" className="drama" onChange={(event) => { handelChange(event) }} />
           <br />
           <label>image</label>
           <input
             type="text"
             className="image"
-            onChange={(event) => { }}
+            onChange={(event) => { handelChange(event) }}
             required
           />
           <br />
           <input type="submit" className="submitSignUpForm" />
         </form>
-        <form className="login" onSubmit={(e) => { }}>
+        <form className="login" onSubmit={(e) => {
+            e.preventDefault()
+            axios.get('http://localhost:8080/users').then(({data})=>{
+                const userDetails = data.filter(ele=>{
+                    return ele.name===existingUser.name
+                })
+                console.log(userDetails)
+                // localStorage.setItem("userLoginDetails",JSON.stringify(userDetails))
+            })
+            // .catch(err=>alert(err))
+         }}>
           <h1>Login</h1>
           <label>name</label>
           <input
             type="text"
             className="name"
-            onChange={(event) => { }}
+            onChange={(event) => { handelLogin(event) }}
             required
           />
           <br />
@@ -79,7 +116,7 @@ export const LoginSignUp = () => {
           <input
             type="text"
             className="password"
-            onChange={(event) => { }}
+            onChange={(event) => { handelLogin(event) }}
             required
           />
           <br />

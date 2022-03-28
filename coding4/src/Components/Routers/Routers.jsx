@@ -11,9 +11,10 @@ export const Routers = () => {
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/loginsignup" element={<LoginSignUp />} />
-            <Route path="/addmeetup" element={<AddMeetup />} />
-            <Route path="*" element={<NotFound /> } />
+            <Route path="/loginsignup" element={<LoginSignUp/>} />
+            <Route path="/meetup/:id" element={<Home />} />
+            <Route path="/addmeetup" element={<AddMeetup/>} />
+            <Route path="*" element={<NotFound/>}   />
             {/* Create other routes here: loginsignup, meetup, addmeetup and 404 */}
             {/* meetup route should be dynamic */}
         </Routes>
