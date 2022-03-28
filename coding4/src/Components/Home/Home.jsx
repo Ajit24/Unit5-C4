@@ -22,13 +22,28 @@ export const Home = () => {
                         border:'1px solid red'
                     }
                 }>
-                    <p>{el.title}</p>
-                    <p>{el.location}</p>
-                    <p>{el.date}</p>
-                    <p>{el.time}</p>
-                    <p>{el.theme}</p>
-                    <p>{el.description}</p>
-                    <p>{el.image}</p>
+                     
+            <table style={ {border: '1px solid black' }}>
+  <tr>
+    <th style={ {border: '1px solid black' }}>title</th>
+    <th style={ {border: '1px solid black' }}>location</th>
+    <th style={ {border: '1px solid black' }}>date</th>
+    <th style={ {border: '1px solid black' }}>time</th>
+    <th style={ {border: '1px solid black' }}>theme</th>
+    <th style={ {border: '1px solid black' }}>description</th>
+    <th style={ {border: '1px solid black' }}>image</th>
+  </tr>
+  <tr>
+    <td style={ {border: '1px solid black' }}>{el.title}</td>
+    <td style={ {border: '1px solid black' }}>{el.location}</td>
+    <td style={ {border: '1px solid black' }}>{el.date}</td>
+    <td style={ {border: '1px solid black' }}>{el.time}</td>
+    <td style={ {border: '1px solid black' }}>{el.theme}</td>
+    <td style={ {border: '1px solid black' }}>{el.description}</td>
+    <td style={ {border: '1px solid black' }}>{el.image}</td>
+  </tr>
+   
+</table>
                 </div>
               {/* add your children here (divs)
               ex : title, theme, description, date, time, location, image(optional)
